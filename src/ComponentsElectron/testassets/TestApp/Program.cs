@@ -6,7 +6,7 @@ namespace TestApp
     {
         public static void Main(string[] args)
         {
-            ComponentsElectron.Run<Startup>("wwwroot/index.html");
+            ComponentsElectron.Run<Startup>("wwwroot/imgui-js/index.html");
         }
     }
 }

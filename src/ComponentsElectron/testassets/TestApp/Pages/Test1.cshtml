@@ -1,0 +1,32 @@
+@page "/test1"
+@using ElectronNET.API;
+@using ElectronNET.API.Entities;
+
+<h1>Test1</h1>
+
+<ul>
+    @foreach (var fileName in fileNames)
+    {
+        <li>@fileName</li>
+    }
+</ul>
+
+<button class="btn btn-primary" onclick="@OpenFileName">Click me</button>
+
+@functions {
+    string[] fileNames = new string[] { "test1", "test2"};
+
+    async Task OpenFileName()
+    {
+        var mainWindow = Electron.WindowManager.BrowserWindows.First();
+
+        var options = new OpenDialogOptions
+        {
+            Properties = new OpenDialogProperty[] {
+                OpenDialogProperty.openFile,
+            }
+        };
+
+        fileNames = await Electron.Dialog.ShowOpenDialogAsync(mainWindow, options);
+    }
+}

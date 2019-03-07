@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -12,6 +12,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\vue.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="VueApp\vue.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Server" Version="$(ComponentsVersion)" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Build" Version="$(ComponentsVersion)" />
@@ -19,6 +29,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Microsoft.AspNetCore.Components.Electron\Microsoft.AspNetCore.Components.Electron.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="imgui-js\**" CopyToOutputDirectory="PreserveNewest" BuildAction="None" PackageCopyToOutput="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="VueApp\**" />
+    <Content Remove="VueApp\**" />
+    <EmbeddedResource Remove="VueApp\**" />
+    <None Remove="VueApp\**" />
   </ItemGroup>
 
   <Target Name="EnsureNpmRestored" BeforeTargets="CoreBuild" Condition="!Exists('node_modules')">
